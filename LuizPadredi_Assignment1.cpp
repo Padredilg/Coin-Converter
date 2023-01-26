@@ -1,6 +1,6 @@
 /*
 Author: Luiz Padredi
-Date: 01/24/2023
+Date: 01/25/2023
 Assignment 1: Coin Dispenser Machine
 Repository: https://github.com/Padredilg/Coin-Converter
 */
@@ -113,6 +113,10 @@ void amountToCoin(){
             cout << "Nickel count = " << nickelCount << endl;
         if(centAmount > 0)
             cout << "Penny count = " << centAmount << endl;
+
+        cout << endl
+             << "**Cha-ching**!!!!"
+             << endl << endl;
     }
     else{ //user input 0
         cout << "Very funny. Here are your coins, oh, wait, there are none!" << endl;
@@ -129,34 +133,32 @@ void coinToAmount(){
     cout << "================================================================================"
          << endl << endl
          << "COINS --> AMOUNT"
+         << endl << endl
+         << "Please enter the quantity of each coin denomination to calculate the dollar amount."
+         << endl << endl
+         << "Quantity of Quarters: ";
+    int quarterCount = collectIntInput();
+
+    cout << "Quantity of Dimes: ";
+    int dimeCount = collectIntInput();
+
+    cout << "Quantity of Nickels: ";
+    int nickelCount = collectIntInput();
+
+    cout << "Quantity of Pennies: ";
+    int pennyCount = collectIntInput();
+
+    int centAmount = (quarterCount * 25) + (dimeCount * 10) + (nickelCount * 5) + pennyCount;
+//    For example 135 cents: 135 / 100 = 1  (dollars) and 135 % 100 = 35 (cents).
+    int dollars = centAmount / 100;
+    int cents = centAmount % 100;
+
+    cout << endl
+         << "Your total is $" << dollars << " and " << cents << " cents."
          << endl << endl;
 
-    //PART 2
-    /*
-    Your coin dispenser should also work the other way around, by receiving coins it would
-    determine  the  dollar  value.  Write  another  program  that  allows  the  user  to  enter  how
-    many  quarters,  dimes,  nickels,  and  pennies  they  have  and  then  outputs  the  monetary
-    value of the coins in dollars and cents.
-
-    For example, if the user enters 4 for the number of quarters, 3 for the number of dimes,
-    and 1 for the number of nickels, then the program should output that the coins are worth
-    $1 dollar and 35 cents.
-    (Sum all, then deal with remaining cents after)
-    */
-
-    /*
-    a)  What are inputs to the program? Declare all the input values as appropriate types.
-    b)  Create a prompting message to prompt the user to input their coin denominations.
-    c)  What’s the expected output? Declare appropriate variables for to store the results.
-    d)  What’s the algorithm to solve the problem? How do you relate the inputs to the output?
-        • Make use of the arithmetic operators to solve this problem.
-        • To separate the dollars and cents use the % and / operator respectively.
-            For the above example 135 cents: 135 / 100 = 1  (dollars) and 135 % 100 = 35 (cents).
-    e)  Display the outputs in an informative manner.
-    */
-
     askForNewConversion();
-    //would you like to do a new conversion? -- Y or N -- if Y, promptForChoice
+
     return;
 }
 
