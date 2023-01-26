@@ -115,6 +115,12 @@ void amountToCoin(){
             cout << "Penny count = " << centAmount << endl;
 
         cout << endl
+             << "Cool! Given your $" << dollarAmount << ", you have $"
+             << quarterCount * 0.25 << " worth of quarters, $"
+             << dimeCount * 0.10 << " worth of dimes, $"
+             << nickelCount * 0.05 << " worth of nickels, and $"
+             << centAmount * 0.01 << " worth of pennies!"
+             << endl << endl
              << "**Cha-ching**!!!!"
              << endl << endl;
     }
