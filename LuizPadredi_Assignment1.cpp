@@ -1,6 +1,6 @@
 /*
 Author: Luiz Padredi
-Date: 01/25/2023
+Date: 01/26/2023
 Assignment 1: Coin Dispenser Machine
 Repository: https://github.com/Padredilg/Coin-Converter
 */
@@ -35,7 +35,7 @@ int main()
 
     promptForChoice();
 
-    cout << "Thank you for using!" << endl
+    cout << "Thank you for your time!" << endl
          << "Goodbye!" << endl;
 
     return 0;
@@ -108,13 +108,13 @@ void amountToCoin(){
     cin >> dollarAmount;
 
 
-    while (cin.fail() || dollarAmount < 0 || dollarAmount > 1000){
+    while (cin.fail() || dollarAmount < 0 || dollarAmount > 100){
         cin.clear(); // clear input buffer to restore cin to a usable state
         cin.ignore(INT_MAX, '\n'); // ignore last input
 
-        if(dollarAmount > 1000){
+        if(dollarAmount > 100){
             cout << endl << "WOAH! I am just a coin dispenser, I can't convert that much money for you!"
-                 << endl << "Why would you even wanna hold that many coins?! I can go as far as 1000, but that's about it!"
+                 << endl << "No coin dispenser holds that much change! I can go as far as $100, but that's about it!"
                  << endl << endl
                  << "Please Try Again" << endl
                  << "(Do not include commas or any special characters other than a period to declare cents)"
@@ -227,7 +227,7 @@ void askForNewConversion(){
     cout << "================================================================================"
          << endl << endl
          << "Would you like to do another conversion?" << endl
-         << "Please select the number corresponding to the service you are looking for."
+         << "Please select the number corresponding to your choice."
          << endl << endl
          << "1 - Yes" << endl
          << "2 - No"
@@ -242,7 +242,7 @@ void askForNewConversion(){
         cout << "That is not a valid entry."
              << endl << endl
              << "Would you like to do another conversion?" << endl
-             << "Please select the number corresponding to the service you are looking for."
+             << "Please select the number corresponding to your choice."
              << endl << endl
              << "1 - Yes" << endl
              << "2 - No"
@@ -273,15 +273,15 @@ void askForNewConversion(){
 int collectCoinCount() {
     int coinCount;
     cin >> coinCount;
-    while (cin.fail() || coinCount < 0 || coinCount > 1000){
+    while (cin.fail() || coinCount < 0 || coinCount > 400){
         cin.clear(); // clear input buffer to restore cin to a usable state
         cin.ignore(INT_MAX, '\n'); // ignore last input
 
 
-        if(coinCount > 1000){
+        if(coinCount > 400){
             cout << endl << "That's a lot of coins!"
                  << endl << "I am doing my best here okay? Just work with me please."
-                 << endl << "I can process up to 1000 at a time. Please enter the number of coins again." << endl << endl;
+                 << endl << "I can process up to 400 at a time. Please enter the number of coins again." << endl << endl;
         }
         else{
             cout << endl << "You can only enter positive numbers. Try again." << endl << endl;
