@@ -5,8 +5,6 @@ Assignment 1: Coin Dispenser Machine
 Repository: https://github.com/Padredilg/Coin-Converter
 */
 
-//FIXME -- Set Cap to like 1000 dollars or something.
-
 #include <iostream>
 
 using namespace std;
@@ -17,10 +15,10 @@ void coinToAmount();
 void askForNewConversion();
 int collectCoinCount();
 
-const double quarterConstant = 0.25;
-const double dimeConstant = 0.10;
-const double nickelConstant = 0.05;
-const double pennyConstant = 0.01;
+const double quarter_constant = 0.25;
+const double dime_constant = 0.10;
+const double nickel_constant = 0.05;
+const double penny_constant = 0.01;
 
 
 int main()
@@ -104,15 +102,15 @@ void amountToCoin(){
          << endl << endl
          << "Amount: $";
 
-    double dollarAmount;
-    cin >> dollarAmount;
+    double dollar_amount;
+    cin >> dollar_amount;
 
 
-    while (cin.fail() || dollarAmount < 0 || dollarAmount > 100){
+    while (cin.fail() || dollar_amount < 0 || dollar_amount > 100){
         cin.clear(); // clear input buffer to restore cin to a usable state
         cin.ignore(INT_MAX, '\n'); // ignore last input
 
-        if(dollarAmount > 100){
+        if(dollar_amount > 100){
             cout << endl << "WOAH! I am just a coin dispenser, I can't convert that much money for you!"
                  << endl << "No coin dispenser holds that much change! I can go as far as $100, but that's about it!"
                  << endl << endl
@@ -127,50 +125,50 @@ void amountToCoin(){
                  << "Amount: $";
         }
 
-        cin >> dollarAmount;
+        cin >> dollar_amount;
     }
 
 
-    cout << "You entered: $" << dollarAmount << endl << endl;
+    cout << "You entered: $" << dollar_amount << endl << endl;
 
-    if(dollarAmount > 0){
+    if(dollar_amount > 0){
     //    First convert the input amount into cents: $5.42 * 100
-        int centAmount = dollarAmount * 100;
+        int cent_amount = dollar_amount * 100;
     //    First the larger coin, quarters
     //    542 / 25 ----> 21 quarters
     //    542 % 25 ----> 17 cents of change
-        int quarterCount = centAmount / 25;
-        centAmount = centAmount % 25;
+        int quarter_count = cent_amount / 25;
+        cent_amount = cent_amount % 25;
     //    Next comes dime.
     //    17 / 10 ---- > 1 dime
     //    17 % 10 -----> 7 cents of change
-        int dimeCount = centAmount / 10;
-        centAmount = centAmount % 10;
+        int dime_count = cent_amount / 10;
+        cent_amount = cent_amount % 10;
     //    After that comes nickels
     //    7 / 5 -----> 1
     //    7 % 5 -------> 2
-        int nickelCount = centAmount / 5;
-        centAmount = centAmount % 5;
+        int nickel_count = cent_amount / 5;
+        cent_amount = cent_amount % 5;
     //    Finally, pennies
     //     2 pennies are what’s left.
 
     //    The next step is displaying the original dollar amount along with the coin designations and
     //    their number.
-        if(quarterCount > 0)
-            cout << "Quarter count = " << quarterCount << endl;
-        if(dimeCount > 0)
-            cout << "Dime count = " << dimeCount << endl;
-        if(nickelCount > 0)
-            cout << "Nickel count = " << nickelCount << endl;
-        if(centAmount > 0)
-            cout << "Penny count = " << centAmount << endl;
+        if(quarter_count > 0)
+            cout << "Quarter count = " << quarter_count << endl;
+        if(dime_count > 0)
+            cout << "Dime count = " << dime_count << endl;
+        if(nickel_count > 0)
+            cout << "Nickel count = " << nickel_count << endl;
+        if(cent_amount > 0)
+            cout << "Penny count = " << cent_amount << endl;
 
         cout << endl
-             << "Cool! Given your $" << dollarAmount << ", you have $"
-             << quarterCount * quarterConstant << " worth of quarters, $"
-             << dimeCount * dimeConstant << " worth of dimes, $"
-             << nickelCount * nickelConstant << " worth of nickels, and $"
-             << centAmount * pennyConstant << " worth of pennies!"
+             << "Cool! Given your $" << dollar_amount << ", you have $"
+             << quarter_count * quarter_constant << " worth of quarters, $"
+             << dime_count * dime_constant << " worth of dimes, $"
+             << nickel_count * nickel_constant << " worth of nickels, and $"
+             << cent_amount * penny_constant << " worth of pennies!"
              << endl << endl
              << "**Cha-ching**!!!!"
              << endl << endl;
@@ -194,21 +192,21 @@ void coinToAmount(){
          << "Please enter the quantity of each coin denomination to calculate the dollar amount."
          << endl << endl
          << "Quantity of Quarters: ";
-    int quarterCount = collectCoinCount();
+    int quarter_count = collectCoinCount();
 
     cout << "Quantity of Dimes: ";
-    int dimeCount = collectCoinCount();
+    int dime_count = collectCoinCount();
 
     cout << "Quantity of Nickels: ";
-    int nickelCount = collectCoinCount();
+    int nickel_count = collectCoinCount();
 
     cout << "Quantity of Pennies: ";
-    int pennyCount = collectCoinCount();
+    int penny_count = collectCoinCount();
 
-    int centAmount = (quarterCount * 25) + (dimeCount * 10) + (nickelCount * 5) + pennyCount;
+    int cent_amount = (quarter_count * 25) + (dime_count * 10) + (nickel_count * 5) + penny_count;
 //    For example 135 cents: 135 / 100 = 1  (dollars) and 135 % 100 = 35 (cents).
-    int dollars = centAmount / 100;
-    int cents = centAmount % 100;
+    int dollars = cent_amount / 100;
+    int cents = cent_amount % 100;
 
     cout << endl
          << "Your total is $" << dollars << " and " << cents << " cents."
@@ -271,14 +269,14 @@ void askForNewConversion(){
 //This function ensures that the user has input a non-negative int.
 */
 int collectCoinCount() {
-    int coinCount;
-    cin >> coinCount;
-    while (cin.fail() || coinCount < 0 || coinCount > 400){
+    int coin_count;
+    cin >> coin_count;
+    while (cin.fail() || coin_count < 0 || coin_count > 400){
         cin.clear(); // clear input buffer to restore cin to a usable state
         cin.ignore(INT_MAX, '\n'); // ignore last input
 
 
-        if(coinCount > 400){
+        if(coin_count > 400){
             cout << endl << "That's a lot of coins!"
                  << endl << "I am doing my best here okay? Just work with me please."
                  << endl << "I can process up to 400 at a time. Please enter the number of coins again." << endl << endl;
@@ -288,7 +286,7 @@ int collectCoinCount() {
         }
 
 
-        cin >> coinCount;
+        cin >> coin_count;
     }
-    return coinCount;
+    return coin_count;
 }
