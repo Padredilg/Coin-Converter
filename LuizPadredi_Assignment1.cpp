@@ -16,7 +16,6 @@ void amountToCoin();
 void coinToAmount();
 void askForNewConversion();
 int collectCoinCount();
-//double collectDoubleInput();
 
 const double quarterConstant = 0.25;
 const double dimeConstant = 0.10;
@@ -293,31 +292,3 @@ int collectCoinCount() {
     }
     return coinCount;
 }
-//
-///*
-//This function ensures that the user has input a non-negative double.
-//*/
-//double collectDoubleInput() {
-//    double amount;
-//    cin >> amount;
-//
-//
-//    while (cin.fail() || amount < 0 || amount > 1000){
-//        cin.clear(); // clear input buffer to restore cin to a usable state
-//        cin.ignore(INT_MAX, '\n'); // ignore last input
-//
-//        if(amount > 1000){
-//            cout << endl << "WOAH! I am just a coin dispenser, I can't convert that much money for you!"
-//                 << endl << "Why would you even wanna hold that many coins?! I can go as far as 1000, but that is about it!"
-//                 << endl << "Please Try Again" << endl;
-//        }
-//        else{
-//            cout << endl << "You can only enter positive numbers. Try again." << endl;
-//        }
-//
-//        cin >> amount;
-//    }
-//
-//
-//    return amount;
-//}
