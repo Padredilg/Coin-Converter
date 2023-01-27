@@ -5,6 +5,8 @@ Assignment 1: Coin Dispenser Machine
 Repository: https://github.com/Padredilg/Coin-Converter
 */
 
+//FIXME -- Set Cap to like 1000 dollars or something.
+
 #include <iostream>
 
 using namespace std;
@@ -13,8 +15,14 @@ void promptForChoice();
 void amountToCoin();
 void coinToAmount();
 void askForNewConversion();
-int collectIntInput();
-double collectDoubleInput();
+int collectCoinCount();
+//double collectDoubleInput();
+
+const double quarterConstant = 0.25;
+const double dimeConstant = 0.10;
+const double nickelConstant = 0.05;
+const double pennyConstant = 0.01;
+
 
 int main()
 {
@@ -45,7 +53,25 @@ void promptForChoice(){
          << "0 - Exit."
          << endl << endl;
 
-    int choice = collectIntInput();
+    int choice;
+    cin >> choice;
+
+
+    while (cin.fail() || choice < 0 || choice > 2){
+        cin.clear(); // clear input buffer to restore cin to a usable state
+        cin.ignore(INT_MAX, '\n'); // ignore last input
+        cout << "That is not a valid entry."
+             << endl << endl
+             << "Please select the number corresponding to the service you are looking for."
+             << endl << endl
+             << "1 - Convert dollar amount into coins" << endl
+             << "2 - Convert coins into dollar amount" << endl
+             << "0 - Exit."
+             << endl << endl;
+
+        cin >> choice;
+    }
+
     cout << "You chose: " << choice << endl << endl;
 
     switch (choice){
@@ -58,7 +84,7 @@ void promptForChoice(){
         case 0:
             break;
         default:
-            cout << "That is not a valid entry." << endl << endl;
+
             promptForChoice();
     }
 
@@ -79,7 +105,33 @@ void amountToCoin(){
          << endl << endl
          << "Amount: $";
 
-    double dollarAmount = collectDoubleInput();
+    double dollarAmount;
+    cin >> dollarAmount;
+
+
+    while (cin.fail() || dollarAmount < 0 || dollarAmount > 1000){
+        cin.clear(); // clear input buffer to restore cin to a usable state
+        cin.ignore(INT_MAX, '\n'); // ignore last input
+
+        if(dollarAmount > 1000){
+            cout << endl << "WOAH! I am just a coin dispenser, I can't convert that much money for you!"
+                 << endl << "Why would you even wanna hold that many coins?! I can go as far as 1000, but that's about it!"
+                 << endl << endl
+                 << "Please Try Again" << endl
+                 << "(Do not include commas or any special characters other than a period to declare cents)"
+                 << endl << endl
+                 << "Amount: $";
+        }
+        else{
+            cout << endl << "You can only enter positive numbers. Try again."
+                 << endl << endl
+                 << "Amount: $";
+        }
+
+        cin >> dollarAmount;
+    }
+
+
     cout << "You entered: $" << dollarAmount << endl << endl;
 
     if(dollarAmount > 0){
@@ -116,10 +168,10 @@ void amountToCoin(){
 
         cout << endl
              << "Cool! Given your $" << dollarAmount << ", you have $"
-             << quarterCount * 0.25 << " worth of quarters, $"
-             << dimeCount * 0.10 << " worth of dimes, $"
-             << nickelCount * 0.05 << " worth of nickels, and $"
-             << centAmount * 0.01 << " worth of pennies!"
+             << quarterCount * quarterConstant << " worth of quarters, $"
+             << dimeCount * dimeConstant << " worth of dimes, $"
+             << nickelCount * nickelConstant << " worth of nickels, and $"
+             << centAmount * pennyConstant << " worth of pennies!"
              << endl << endl
              << "**Cha-ching**!!!!"
              << endl << endl;
@@ -143,16 +195,16 @@ void coinToAmount(){
          << "Please enter the quantity of each coin denomination to calculate the dollar amount."
          << endl << endl
          << "Quantity of Quarters: ";
-    int quarterCount = collectIntInput();
+    int quarterCount = collectCoinCount();
 
     cout << "Quantity of Dimes: ";
-    int dimeCount = collectIntInput();
+    int dimeCount = collectCoinCount();
 
     cout << "Quantity of Nickels: ";
-    int nickelCount = collectIntInput();
+    int nickelCount = collectCoinCount();
 
     cout << "Quantity of Pennies: ";
-    int pennyCount = collectIntInput();
+    int pennyCount = collectCoinCount();
 
     int centAmount = (quarterCount * 25) + (dimeCount * 10) + (nickelCount * 5) + pennyCount;
 //    For example 135 cents: 135 / 100 = 1  (dollars) and 135 % 100 = 35 (cents).
@@ -182,7 +234,24 @@ void askForNewConversion(){
          << "2 - No"
          << endl << endl;
 
-    int choice = collectIntInput();
+    int choice;
+    cin >> choice;
+
+    while (cin.fail() || choice < 0 || choice > 2){
+        cin.clear(); // clear input buffer to restore cin to a usable state
+        cin.ignore(INT_MAX, '\n'); // ignore last input
+        cout << "That is not a valid entry."
+             << endl << endl
+             << "Would you like to do another conversion?" << endl
+             << "Please select the number corresponding to the service you are looking for."
+             << endl << endl
+             << "1 - Yes" << endl
+             << "2 - No"
+             << endl << endl;
+
+        cin >> choice;
+    }
+
     cout << "You chose: " << choice << endl << endl;
 
     switch (choice){
@@ -200,31 +269,55 @@ void askForNewConversion(){
 }
 
 /*
-This function ensures that the user has input a non-negative int.
+//This function ensures that the user has input a non-negative int.
 */
-int collectIntInput() {
-    int choice;
-    cin >> choice;
-    while (cin.fail() || choice < 0){
+int collectCoinCount() {
+    int coinCount;
+    cin >> coinCount;
+    while (cin.fail() || coinCount < 0 || coinCount > 1000){
         cin.clear(); // clear input buffer to restore cin to a usable state
         cin.ignore(INT_MAX, '\n'); // ignore last input
-        cout << endl << "You can only enter positive numbers. Try again." << endl;
-        cin >> choice;
-    }
-    return choice;
-}
 
-/*
-This function ensures that the user has input a non-negative double.
-*/
-double collectDoubleInput() {
-    double amount;
-    cin >> amount;
-    while (cin.fail() || amount < 0){
-        cin.clear(); // clear input buffer to restore cin to a usable state
-        cin.ignore(INT_MAX, '\n'); // ignore last input
-        cout << endl << "You can only enter positive numbers. Try again." << endl;
-        cin >> amount;
+
+        if(coinCount > 1000){
+            cout << endl << "That's a lot of coins!"
+                 << endl << "I am doing my best here okay? Just work with me please."
+                 << endl << "I can process up to 1000 at a time. Please enter the number of coins again." << endl << endl;
+        }
+        else{
+            cout << endl << "You can only enter positive numbers. Try again." << endl << endl;
+        }
+
+
+        cin >> coinCount;
     }
-    return amount;
+    return coinCount;
 }
+//
+///*
+//This function ensures that the user has input a non-negative double.
+//*/
+//double collectDoubleInput() {
+//    double amount;
+//    cin >> amount;
+//
+//
+//    while (cin.fail() || amount < 0 || amount > 1000){
+//        cin.clear(); // clear input buffer to restore cin to a usable state
+//        cin.ignore(INT_MAX, '\n'); // ignore last input
+//
+//        if(amount > 1000){
+//            cout << endl << "WOAH! I am just a coin dispenser, I can't convert that much money for you!"
+//                 << endl << "Why would you even wanna hold that many coins?! I can go as far as 1000, but that is about it!"
+//                 << endl << "Please Try Again" << endl;
+//        }
+//        else{
+//            cout << endl << "You can only enter positive numbers. Try again." << endl;
+//        }
+//
+//        cin >> amount;
+//    }
+//
+//
+//    return amount;
+//}
